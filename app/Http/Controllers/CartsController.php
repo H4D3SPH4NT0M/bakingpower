@@ -30,7 +30,6 @@ class CartsController extends Controller
      public function checkout(Request $request)
     {
     dump(Cart::content());
-    dump(Auth::user()->all());
     if (Cart::content()->isEmpty()) {
         return redirect()->route('carts')->with('Winkelwagen is leeg.');
         //return image where name is empty

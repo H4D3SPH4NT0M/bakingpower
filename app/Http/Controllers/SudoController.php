@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Sudo;
+use App\Models\User;
+
+
+
 use Illuminate\Http\Request;
 
 class SudoController extends Controller
@@ -14,10 +17,26 @@ class SudoController extends Controller
      */
     public function index()
     {
-        //return sudu.blade
-        return view('admin');
 
+        if(auth()->user()->usertype == 'sudo') {
+            $sudo = User::all();
+            return view('admin', compact('sudo'));
+        } else {
+            echo "You are not authorized to view this page helaas => ;-)" .' '. auth()->user()->name;
+            // dd(auth()->user()->usertype);
+        }
+
+        
     }
+
+    //get all user_orders from database
+    public function getAllUserOrders()
+    {
+        $user_orders = Sudo::all();
+        return view('admin', ['user_orders' => Sudo::all()]);
+    }
+
+
 
     /**
      * Show the form for creating a new resource.
