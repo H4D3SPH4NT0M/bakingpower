@@ -29,27 +29,26 @@ Route::get('/', function () {
     })->name('welcome');
 Auth::routes();
 
-//return cart page
 
-Route::get('/admin', [App\Http\Controllers\SudoController::class, 'index'])
-->name('administrator');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 ->name('home');
 Route::post('/carts', [App\Http\Controllers\CartsController::class, 'remove']);
-
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])
 ->name('products');
-//return view cart
 Route::get('/carts', [App\Http\Controllers\CartsController::class, 'checkout'])
 ->name('carts');
 Route::get('/checkout', [App\Http\Controllers\ProductController::class, 'index'])
 ->name('checkout');
 Route::post('/checkout', [App\Http\Controllers\ProductController::class, 'addtocart']);
 Route::post('/carts', [App\Http\Controllers\CartsController::class, 'user_order']);
+Route::get('/admin', [App\Http\Controllers\SudoController::class, 'index'])
+->name('admin');
+Route::post('/admin', [App\Http\Controllers\SudoController::class, 'get_invoices']);
 
 
-//route login
 
+
+//straks allemaal nodig nu niet meer
 
 // //add to cart
 // Route::get('/add-to-cart/{id}', [App\Http\Controllers\CartController::class, 'adds'])->name('add-to-cart');

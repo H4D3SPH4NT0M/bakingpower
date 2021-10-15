@@ -127,7 +127,7 @@ class CartsController extends Controller
         $user = User::find(Auth::user()->id);
         $user->user_orders = $user->user_orders . '->'. $invoice->url();
         $user->save();
-    return $invoice->stream();
+     return $invoice->stream();
     //save invoice in stirage as link
 //    return  $invoice->Storage::disk('public')->save($fileLocation);
 

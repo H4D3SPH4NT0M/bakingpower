@@ -55,14 +55,15 @@
 					<div>
 					<h5 class="text-grey">€{{{$row->price}}}</h5>
 					</div>
-					<div class="d-flex align-items-center">
-						<form action="/carts" method="post">
-							@csrf
+						<div class="d-flex align-items-center">
+					<form action="/carts" method="post">
+						@csrf
 						<input type="hidden" value="{{$row->rowId}}" name="id">
-							<input type="submit" class="fa fa-trash mb-1 text-danger">
-						</form>				
+						<input type="submit" class="fa fa-trash mb-1 text-danger">
+					</form>	
+
 						</div>
-				</div>
+					</div>
 				@endforeach
 
 				<form action="/carts" method="post">

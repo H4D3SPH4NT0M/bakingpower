@@ -50,7 +50,7 @@
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Layouts
+                                Warhouses
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -61,7 +61,7 @@
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
+                                Error logs
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
@@ -90,20 +90,12 @@
                                     </div>
                                 </nav>
                             </div>
-                            <div class="sb-sidenav-menu-heading">Addons</div>
-                            <a class="nav-link" href="charts.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
-                            </a>
-                            <a class="nav-link" href="tables.html">
-                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
-                            </a>
+                           
                         </div>
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Logged in as:</div>
-                        Start Bootstrap
+                        Administrator
                     </div>
                 </nav>
             </div>
@@ -147,34 +139,30 @@
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
-                                    <thead>
+                                    <thead>                                            @csrf
                                         @foreach ($sudo as $order)  
+                                        <form action="/admin" method="post">
+                                            @csrf
                                         <tr>
                                             <th>Name</th>
                                             <th>Order</th>
                                             <th>Invoice</th>
                                             <th>Complete</th>
                                         </tr>
-                                        <tbody>
                                             <!-- if there no invoice show nothing in table-->
-
-
-
-                                            @if ($order->user_orders > 0)
                                             <td>{{{$order->name}}}</td>  
                                             <td>{{{$order->user_orders}}}</td>
-                                            @endif
+                                            <input type="hidden" value="{{$order->id}}" name="id">                                            
 
-                                            <td><button>Show invoice</button></td> 
-                                            <td><button type="button" class="btn btn-success">Complete</button></td>
+                                            <input type="hidden" value="{{$order->id}}" name="id">
+                                            <td><button type="submit" class="btn btn-warning">Show invoice</button></td>  
+                                            <td><button class="btn btn-success">Complete</button></td>
+                                        </form>
                                             @endforeach  
 
-
-                                        </tbody>
                                     </thead>
                                
                             
-                                    </tbody>
                                 </table>
                             </div>
                         </div>
