@@ -125,7 +125,12 @@ class CartsController extends Controller
         ->save('public');
 
         $user = User::find(Auth::user()->id);
-        $user->user_orders = $user->user_orders . '->'. $invoice->url();
+        if($user->user_orders == null){
+            $user->user_orders = $user->user_orders . $invoice->url();
+        }
+        else{
+            $user->user_orders = $user->user_orders . '->'. $invoice->url();
+        }
         $user->save();
      return $invoice->stream();
     //save invoice in stirage as link

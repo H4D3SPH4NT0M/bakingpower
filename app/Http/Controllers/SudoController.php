@@ -13,6 +13,7 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
 
 
 use Illuminate\Http\Request;
+use Svg\Tag\Rect;
 
 class SudoController extends Controller
 {
@@ -21,25 +22,41 @@ class SudoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         if(auth()->user()->usertype == 'sudo') {
             $sudo = User::all();
             return view('admin', compact('sudo'));
+            $invoice = user::find($request->id)->user_orders;
+            $invoice = explode(',', $invoice);
         } else {
             echo "You are not authorized to view this page helaas => ;-)" .' '. auth()->user()->name;
         }
 
     }
-        public function get_invoices(Request $request){        
+    //get invoices knop
+        public function get_invoices(Request $request){   
+                 
         $invoice = user::find($request->id)->user_orders;
-        dd($invoice);
-
-    //    $explode = explode('->', $invoice);
-    //    return $invoice->url().' '.$invoice->id;
-
+        $invoice = explode('->', $invoice);
+        $invoice = array_filter($invoice);
+        $test = explode('/', $invoice[0]);
+        return response()->download(public_path().'/storage/'. $test[count($test)-1]);
     
     }
+    public function order_complete(Request $requist){
+        // if order finished set 1 in user_orders column
+        $user = User::find($requist->id);
+        $user-> ordercomplete = 1;
+        $user->save();
+        return redirect()->route('carts')->with('message', 'Order has now been finished and removed');
 
-}
+
+
+
+        }
+
+
+    }
+

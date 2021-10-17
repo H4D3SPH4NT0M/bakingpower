@@ -44,6 +44,8 @@ Route::post('/carts', [App\Http\Controllers\CartsController::class, 'user_order'
 Route::get('/admin', [App\Http\Controllers\SudoController::class, 'index'])
 ->name('admin');
 Route::post('/admin', [App\Http\Controllers\SudoController::class, 'get_invoices']);
+Route::post('/admin', [App\Http\Controllers\SudoController::class, 'order_complete']);
+
 
 
 
