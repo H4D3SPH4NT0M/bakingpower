@@ -56,10 +56,11 @@
 					<h5 class="text-grey">€{{{$row->price}}}</h5>
 					</div>
 						<div class="d-flex align-items-center">
-					<form action="/carts" method="post">
+					<form action="/carts/remove" method="post">
 						@csrf
 						<input type="hidden" value="{{$row->rowId}}" name="id">
-						<input type="submit" class="fa fa-trash mb-1 text-danger">
+						<button type="submit" class="btn_one"><i class="fa fa-trash"></i>Trash</button>
+
 					</form>	
 
 						</div>

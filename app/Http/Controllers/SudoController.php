@@ -33,25 +33,33 @@ class SudoController extends Controller
         } else {
             echo "You are not authorized to view this page helaas => ;-)" .' '. auth()->user()->name;
         }
-
+    }
+    public function stock_page()
+    {
+        if(auth()->user()->usertype == 'sudo') {
+            $sudo = User::all();
+            return view('stock', compact('sudo'));
+        } else {
+            echo "You are not authorized to view this page helaas => ;-)" .' '. auth()->user()->name;
+        }
     }
     //get invoices knop
-        public function get_invoices(Request $request){   
-                 
+    public function get_invoices(Request $request){   
+                
         $invoice = user::find($request->id)->user_orders;
         $invoice = explode('->', $invoice);
         $invoice = array_filter($invoice);
         $test = explode('/', $invoice[0]);
         return response()->download(public_path().'/storage/'. $test[count($test)-1]);
-    
     }
+
     public function order_complete(Request $requist){
-        // if order finished set 1 in user_orders column
+    // if order finished set 1 in user_orders column
         $user = User::find($requist->id);
         $user-> ordercomplete = 1;
-        $user->save();
-        return redirect()->route('carts')->with('message', 'Order has now been finished and removed');
-
+        $user->save();        
+        return redirect()->route('admin')->with('message', 'Order has now been finished and removed');
+        
 
 
 

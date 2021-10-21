@@ -32,7 +32,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 ->name('home');
-Route::post('/carts', [App\Http\Controllers\CartsController::class, 'remove']);
+Route::post('/carts/remove', [App\Http\Controllers\CartsController::class, 'remove']);
 Route::get('/products', [App\Http\Controllers\ProductController::class, 'index'])
 ->name('products');
 Route::get('/carts', [App\Http\Controllers\CartsController::class, 'checkout'])
@@ -44,7 +44,11 @@ Route::post('/carts', [App\Http\Controllers\CartsController::class, 'user_order'
 Route::get('/admin', [App\Http\Controllers\SudoController::class, 'index'])
 ->name('admin');
 Route::post('/admin', [App\Http\Controllers\SudoController::class, 'get_invoices']);
-Route::post('/admin', [App\Http\Controllers\SudoController::class, 'order_complete']);
+Route::post('/admin/order_complete', [App\Http\Controllers\SudoController::class, 'order_complete']);
+Route::GET('/admin/stock', [App\Http\Controllers\SudoController::class, 'stock_page']);
+
+//call other fucntion in the same controller 
+
 
 
 

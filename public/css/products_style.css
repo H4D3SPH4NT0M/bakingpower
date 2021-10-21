@@ -18,6 +18,10 @@ select,
     color: orange
 }
 
+.btn_one {
+    color: red
+}
+
 .fa-search {
     font-size: 20px;
     padding: 10px;

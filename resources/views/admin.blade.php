@@ -11,10 +11,19 @@
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
     </head>
+    <header>
+        <!-- return message from controller laravel-->
+        @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{session()->get('message')}}
+        </div>
+        @endif
+        
+    </header>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand ps-3" href="/admin">Start Bootstrap</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -43,19 +52,19 @@
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Core</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="/admin">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Dashboard
                             </a>
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Warhouses
+                                Warehouse
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
+                                    <a class="nav-link" href="admin/stock">Edit stock</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
                                 </nav>
                             </div>
@@ -106,11 +115,7 @@
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
-                        <div class="row">
-                        
-                          
-                           
-                           
+                        <div class="row"> 
                         </div>
                         <div class="row">
                             <div class="col-xl-6">
@@ -139,13 +144,10 @@
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
-                                    <thead>                                            @csrf
-                                        
+                                    <thead>
                                     <!-- Rest of the template -->
-
                                         <form action="/admin" method="post">
                                             @csrf
-
                                         <tr>
                                             <th>Name</th>
                                             <th>Order</th>
@@ -154,29 +156,25 @@
                                             @foreach ($sudo as $order)                                          
                                         </tr>
                                         <!-- laat alleen orders zien die niet leeg zijn -->
-                                                                                                                      
-
                                         @if ($order->ordercomplete == '0')
-                                
                                             <td>{{{$order->name}}}</td>  
                                             <td>{{{$order->user_orders}}}</td>
-                                            <input type="hidden" value="{{$order->id}}" name="id">  
-
-                                            <input type="hidden" value="{{$order->id}}" name="id">
                                             <td><button type="submit" class="btn btn-warning">Show invoice</button></td>  
-                                            <td><button type="submit" class="btn btn-success" onclick="return confirm('Are you sure?')" >Complete</button></td>
+                                            <input type="hidden" value="{{$order->id}}" name="id">
+
+                                        </form>
+                                        <form action="/admin/order_complete" method="post">
+                                            @csrf
+                                            <td><button type="submit" class="btn btn-success" onclick="return confirm('Are you sure about tha?')" >Complete</button></td>
+                                            <input type="hidden" value="{{$order->id}}" name="id">  
                                         </form>
                                         @continue                                          
                                         @endif
-                                            @endforeach  
-
+                                        @endforeach  
                                     </thead>
-                               
-                            
                                 </table>
-                            </div>
-                        </div>
-                    </div>
+                                
+                                
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">
