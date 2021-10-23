@@ -113,13 +113,16 @@
                         <div class="table-wrap table-responsive">
                             <table class="table table-borderless">
                                 <thead>
+                                    @foreach ($product->stores as $store)
+
                                     <tr class="p-0">
-                                        <td class="w350 p-0" scope="col"> <small class=" btn btn-primary h-1 px-2">ISSUES FOUND</small> </td>
-                                        <td class="text-center w100 p-0 py-2" scope="col"><small class="text-muted">ASSIGNEE</small> </td>
-                                        <td class="text-center w100 p-0 py-2" scope="col"><small class="text-muted">DUE DATE</small> </td>
+                                        <td class="w350 p-0" scope="col"> <small class=" btn btn-primary h-1 px-2">Store Amsterdam </small> </td>
+                                        <td class="text-center w100 p-0 py-2" scope="col"><small class="text-muted">{{$store->product_name}}</small> </td>
+                                        {{-- <td class="text-center w100 p-0 py-2" scope="col"><small class="text-muted">{{$storme->store_address}}</small> </td> --}}
                                         <td class="text-center w100 p-0 py-2" scope="col"><small class="text-muted">STAGE</small></td>
                                         <td class="text-center w100 p-0 py-2" scope="col"><small class="text-muted">PRIORITY</small> </td>
                                     </tr>
+                                    @endforeach
                                 </thead>
                                 <tbody>
                                     <tr class="border-bottom bg-white">
@@ -154,7 +157,7 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr class="p-0">
-                                        <td class="w350 p-0" scope="col"> <small class=" btn btn-primary h-2 px-2">REVIEW</small> </td>
+                                        <td class="w350 p-0" scope="col"> <small class=" btn btn-primary h-2 px-2">Store Rotterdam</small> </td>
                                         <td class="text-center w100 p-0 py-2" scope="col"> </td>
                                         <td class="text-center w100 p-0 py-2" scope="col"> </td>
                                         <td class="text-center w100 p-0 py-2" scope="col"></td>
@@ -164,7 +167,7 @@
                                 <tbody>
                                     <tr class="border-bottom bg-white">
                                         <td class="row">
-                                            <div class="d-flex align-items-center"> <span class="bg-yellow mx-2"></span> <span>Budget assessment</span> <span class="mx-2 text-muted">3</span> <span class="far fa-comment-alt text-muted"></span> </div>
+                                            <div class="d-flex align-items-center"> <span class="bg-yellow mx-2"></span> <span>Budget assessment</span><span class="mx-2 text-muted"></span></div>
                                         </td>
                                         <td class="text-center"> <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fHByb2ZpbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="rounded-circle" alt=""> </td>
                                         <td class="text-center"><span class="far fa-calendar-alt text-muted"></span></td>
@@ -182,7 +185,7 @@
                                     </tr>
                                     <tr class="border-bottom bg-white">
                                         <td class="row">
-                                            <div class="d-flex align-items-center"> <span class="bg-yellow mx-2"></span> <span>Gather key resources</span> <span class="text-muted ps-2">+4</span> <span class="text-muted fas fa-tag ps-1"></span> <span class="text-muted ps-2">5</span> <span class="text-muted fas fa-paperclip ps-1"></span> </div>
+                                            <div class="d-flex align-items-center"> <span class="bg-yellow mx-2"></span> <span>Gather key resources</span> <span class="text-muted ps-2"></span> </div>
                                         </td>
                                         <td class="text-center"> <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDR8fHByb2ZpbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="rounded-circle" alt=""> </td>
                                         <td class="text-center"><span class="far fa-calendar-alt text-muted"></span></td>
@@ -194,7 +197,7 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr class="p-0">
-                                        <td class="w350 p-0" scope="col"> <small class=" btn btn-primary h-3 px-2">ISSUES FOUND</small> </td>
+                                        <td class="w350 p-0" scope="col"> <small class=" btn btn-primary h-3 px-2">Store Lelystad</small> </td>
                                         <td class="text-center w100 p-0 py-2" scope="col"> </td>
                                         <td class="text-center w100 p-0 py-2" scope="col"><small class="text-muted"></small> </td>
                                         <td class="text-center w100 p-0 py-2" scope="col"><small class="text-muted"></small></td>
@@ -222,7 +225,7 @@
                                     </tr>
                                     <tr class="border-bottom bg-white">
                                         <td class="row">
-                                            <div class="d-flex align-items-center"> <span class="bg-violet mx-2"></span> <span>Update key objectives</span> <span class="text-muted ps-2 pe-1">5</span> <span class="fas fa-paperclip text-muted"></span> </div>
+                                            <div class="d-flex align-items-center"> <span class="bg-violet mx-2"></span> <span>Update key objectives</span> <span class="text-muted ps-2 pe-1"></span></div>
                                         </td>
                                         <td class="text-center"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTZ8fHByb2ZpbGV8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60" class="rounded-circle" alt=""></td>
                                         <td class="text-center"><span class="far fa-calendar-alt text-muted"></span></td>

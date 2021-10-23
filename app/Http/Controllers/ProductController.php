@@ -26,6 +26,7 @@ class ProductController extends Controller
 
         ]);
     }
+ 
 
     public function addtocart(Request $request){
     
