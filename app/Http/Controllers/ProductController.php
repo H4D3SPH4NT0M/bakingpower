@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Products;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
@@ -18,28 +18,23 @@ class ProductController extends Controller
    
     public function index()
     {
-    //return back all columns -> products from database
-    dump(Cart::content());
-
+        dump(Cart::content());
         return view('products', [
-            'product' => Product::all()
-
+            'product' => Products::all()
         ]);
+        
     }
  
 
     public function addtocart(Request $request){
     
-        $product = Product::findOrFail($request->input('id'));
-        
-
+        $product = Products::findOrFail($request->input('id'));
         Cart::add( 
             $product->id,
             $product->product_name,
             $request->input('product_quantity'),
             $product->product_price,
         );
-
 
     return redirect()->route('carts')->with('message', 'Successfully added');
 
@@ -49,7 +44,7 @@ class ProductController extends Controller
 // add product to cart with session and redirect to cart
     // public function addToCart(Request $request, $id)
     // {
-    //     $product = Product::find($id);
+    //     $product = Products::find($id);
     //     $oldCart = session()->has('cart') ? session()->get('cart') : null;
     //     $cart = new Cart($oldCart);
     //     $cart->add($product, $product->id);

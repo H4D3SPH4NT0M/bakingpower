@@ -146,26 +146,26 @@
                                 <table id="datatablesSimple">
                                     <thead>
                                     <!-- Rest of the template -->
-                                        <form action="/admin" method="post">
-                                            @csrf
+                                        
                                         <tr>
                                             <th>Name</th>
                                             <th>Order</th>
                                             <th>Invoice</th>
                                             <th>Complete</th>
-                                            @foreach ($sudo as $order)                                          
+                                            @foreach ($sudo as $order)    
                                         </tr>
                                         <!-- laat alleen orders zien die niet leeg zijn -->
                                         @if ($order->ordercomplete == '0')
                                             <td>{{{$order->name}}}</td>  
                                             <td>{{{$order->user_orders}}}</td>
+                                         <form action="/admin" method="post">
                                             <td><button type="submit" class="btn btn-warning">Show invoice</button></td>  
                                             <input type="hidden" value="{{$order->id}}" name="id">
-
+                                            @csrf                                      
                                         </form>
                                         <form action="/admin/order_complete" method="post">
                                             @csrf
-                                            <td><button type="submit" class="btn btn-success" onclick="return confirm('Are you sure about tha?')" >Complete</button></td>
+                                            <td><button type="submit" class="btn btn-success" onclick="return confirm('Are you sure?')">Complete</button></td>
                                             <input type="hidden" value="{{$order->id}}" name="id">  
                                         </form>
                                         @continue                                          
@@ -173,8 +173,6 @@
                                         @endforeach  
                                     </thead>
                                 </table>
-                                
-                                
                 </main>
                 <footer class="py-4 bg-light mt-auto">
                     <div class="container-fluid px-4">

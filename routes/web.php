@@ -45,7 +45,7 @@ Route::get('/admin', [App\Http\Controllers\SudoController::class, 'index'])
 ->name('admin');
 Route::post('/admin', [App\Http\Controllers\SudoController::class, 'get_invoices']);
 Route::post('/admin/order_complete', [App\Http\Controllers\SudoController::class, 'order_complete']);
-Route::GET('/admin/stock', [App\Http\Controllers\SudoController::class, 'stock_page']);
+Route::get('/admin/stock', [App\Http\Controllers\StockController::class, 'index']);
 
 //call other fucntion in the same controller 
 

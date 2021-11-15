@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ProductStore extends Migration
+class Productsstorehhh extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class ProductStore extends Migration
      */
     public function up()
     {
-        Schema::create('products_stores', function (Blueprint $table) {
+            
+        Schema::create('product_store', function (Blueprint $table) {
             $table->id();
-            $table->integer('products_id');
-            $table->integer('stores_id');
+            $table->integer('product_id');
+            $table->integer('store_id');
             $table->timestamps();
 
         });

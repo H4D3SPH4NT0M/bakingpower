@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ProductStore extends Migration
+class Productsstore extends Migration
 {
     /**
      * Run the migrations.
@@ -13,6 +13,7 @@ class ProductStore extends Migration
      */
     public function up()
     {
+    
         Schema::create('products_stores', function (Blueprint $table) {
             $table->id();
             $table->integer('products_id');

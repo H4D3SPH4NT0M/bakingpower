@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\carts;
-use App\Models\Product;
+use App\Models\Products;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -27,7 +27,7 @@ class CartsController extends Controller
      */
   
   
-     public function checkout(Request $request)
+    public function checkout(Request $request)
     {
     dump(Cart::content());
     if (Cart::content()->isEmpty()) {
@@ -35,7 +35,7 @@ class CartsController extends Controller
         //return image where name is empty
     }
     return view('carts', [
-        'carts' => Product::all()
+        'carts' => Products::all()
     ]);
 
     }
@@ -73,7 +73,7 @@ class CartsController extends Controller
 
     $items = [
             // ->title('Service 1')
-            // ->description('Your product or service description')
+            // ->description('Your Products or service description')
             // ->pricePerUnit(47.79)
             // ->quantity(2)
             // ->discount(10),
@@ -157,18 +157,18 @@ class CartsController extends Controller
 
 
     //     Cart::instance('store')->store(Auth::user()->id);
-    //  return redirect()->route('carts')->with('success_message', 'Product is toegewezen aan de DB.');
+    //  return redirect()->route('carts')->with('success_message', 'Products is toegewezen aan de DB.');
 
 //         foreach (Cart::content() as $item) {
 //             $cart = new carts();
 //             $cart->user_id = Auth::user()->id; //return user id in db
-//             $cart->product_id = $item;
+//             $cart->Products_id = $item;
 
 //             $cart->toArray();
 //             dump($cart);
 
 //             // $cart->save()->where($this->users::column('user_orders'));
-//             return redirect()->route('carts')->with('success_message', 'Product is toegewezen aan de DB.');
+//             return redirect()->route('carts')->with('success_message', 'Products is toegewezen aan de DB.');
         
 //  } 
 
