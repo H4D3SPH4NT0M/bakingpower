@@ -135,20 +135,28 @@
                 <!-- Modal body -->
                 <div class="modal-body">
                     <div class="wrapper bg-white mt-sm-5">  
-                        <h4 class="pb-4 border-bottom">Add products</h4>
+                        <h4 class="pb-4 border-bottom">Add new product:</h4>
                         <div class="d-flex align-items-start py-3 border-bottom"> <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img" alt="">
-                            <div class="pl-sm-4 pl-2" id="img-section"> <b>Profile Photo</b>
+                            <div class="pl-sm-4 pl-2" id="img-section"> <b>Product image</b>
                                 <p>Accepted file type .png. Less than 1MB</p> <button class="btn button border"><b>Upload</b></button>
                             </div>
                         </div>
                         <div class="py-2">
                             <div class="row py-2">
-                                <div class="col-md-6"> <label for="firstname">First Name</label> <input type="text" class="bg-light form-control" placeholder="Steve"> </div>
-                                <div class="col-md-6 pt-md-0 pt-3"> <label for="lastname">Last Name</label> <input type="text" class="bg-light form-control" placeholder="Smith"> </div>
-                            </div>
-                            <div class="row py-2">
-                                <div class="col-md-6"> <label for="email">Email Address</label> <input type="text" class="bg-light form-control" placeholder="steve_@email.com"> </div>
-                                <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">Phone Number</label> <input type="tel" class="bg-light form-control" placeholder="+1 213-548-6015"> </div>
+                                <div class="col-md-6"> <label for="productname">Product name</label> <input type="text" class="bg-light form-control" placeholder="product name"> </div>
+                                <div class="col-md-6 pt-md-0 pt-3">
+                                {{-- dropdown menu --}}
+                                    <div class="form-group">
+                                        <label for="productcategory">Product category</label>
+                                        <select class="form-control" id="productcategory">
+                                            <option>Category 1</option>
+                                            <option>Category 2</option>
+                                            <option>Category 3</option>
+                                            <option>Category 4</option>
+                                            <option>Category 5</option>
+                                        </select>
+                                    </div>
+                             </div>
                             </div>
                                 </div>
                             </div>
