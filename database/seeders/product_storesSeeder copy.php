@@ -19,9 +19,6 @@ class ProductSeeder extends Seeder
   
 
         [
-            'id' => 1,
-            'created_at' => now(),
-            'updated_at' => now(),
             'product_listings' => '',
             'product_pictures' => '',
             'user_orders' => '',

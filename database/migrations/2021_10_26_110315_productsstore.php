@@ -14,11 +14,8 @@ class Productsstore extends Migration
     public function up()
     {
     
-        Schema::create('products_stores', function (Blueprint $table) {
-            $table->id();
-            $table->integer('products_id');
-            $table->integer('stores_id');
-            $table->timestamps();
+        Schema::table('products_stores', function (Blueprint $table) {          
+            $table->integer('qty');
 
         });
     }

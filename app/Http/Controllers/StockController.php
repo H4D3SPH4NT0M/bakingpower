@@ -34,7 +34,30 @@ class StockController extends Controller
         'stores' => Stores::all(),
       ]);
 
-    
+    }
 
+    public function update(request $request)
+    {
+      $product = Products::findOrFail($request->input('id'));
+      $product->product_quantity = $request->input('product_quantity');
+      $product->save();
+      return redirect()->route('stock');
+    }
+    
+    public function delete(request $request)
+    {
+      $product = Products::findOrFail($request->input('id'));
+      $product->delete();
+      return redirect()->route('stock');
+    }
+
+    public function create(request $request)
+    {
+      $product = new Products;
+      $product->product_name = $request->input('product_name');
+      $product->product_price = $request->input('product_price');
+      $product->product_quantity = $request->input('product_quantity');
+      $product->save();
+      return redirect()->route('stock');
     }
 }

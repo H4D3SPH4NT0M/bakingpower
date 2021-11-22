@@ -10,6 +10,10 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="../css/styles.css" rel="stylesheet" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
     <header>
         <!-- return message from controller laravel-->
@@ -23,7 +27,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="/admin">Start Bootstrap</a>
+            <a class="navbar-brand ps-3" href="/admin">admin/panel</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -107,39 +111,138 @@
                     </div>
                 </nav>
             </div>
-            <div id="layoutSidenav_content">
-                <main>
-                
-                    <div class="container">
-                        <table class="table table-striped custab">
+
+        
+
+{{-- make a modal bootstrap     --}}
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container">
+                <table class="table table-striped custab">
+                <thead>
+                <a href="#" data-toggle="modal" data-target="#productModal" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new products</a>
+
+    {{-- start modal --}}
+    <div class="container">
+                    
+                          
+        <!-- The Modal -->
+        <div class="modal" id="productModal">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+              
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="wrapper bg-white mt-sm-5">  
+                        <h4 class="pb-4 border-bottom">Add products</h4>
+                        <div class="d-flex align-items-start py-3 border-bottom"> <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img" alt="">
+                            <div class="pl-sm-4 pl-2" id="img-section"> <b>Profile Photo</b>
+                                <p>Accepted file type .png. Less than 1MB</p> <button class="btn button border"><b>Upload</b></button>
+                            </div>
+                        </div>
+                        <div class="py-2">
+                            <div class="row py-2">
+                                <div class="col-md-6"> <label for="firstname">First Name</label> <input type="text" class="bg-light form-control" placeholder="Steve"> </div>
+                                <div class="col-md-6 pt-md-0 pt-3"> <label for="lastname">Last Name</label> <input type="text" class="bg-light form-control" placeholder="Smith"> </div>
+                            </div>
+                            <div class="row py-2">
+                                <div class="col-md-6"> <label for="email">Email Address</label> <input type="text" class="bg-light form-control" placeholder="steve_@email.com"> </div>
+                                <div class="col-md-6 pt-md-0 pt-3"> <label for="phone">Phone Number</label> <input type="tel" class="bg-light form-control" placeholder="+1 213-548-6015"> </div>
+                            </div>
+                                </div>
+                            </div>
+                            <div class="py-3 pb-4 border-bottom"> <button class="btn btn-primary mr-3">Save Changes</button> <button class="btn border button">Cancel</button> </div>
+                            <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+                                <div> <b>Add new products and assign them to the store</b>
+                                    <p>Details about your company account and password</p>
+                                </div>
+                                <div class="ml-auto"> <button class="btn danger">close window</button> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <tr>
+            <th>ID</th>
+            <th>store</th>
+            <th>Product-Name</th>
+            <th class="text-center">Action</th>
+            <th class="text-center">qty</th>
+        </tr>
+    </thead>
+        @foreach ($products as $item)
+                <tr>
+                    <td>{{$item->id}}</td>
+                    <td>@foreach ($item->stores as $store)
+                        {{$store->store_name}}
+                        <br>
+                        @endforeach</td>
+                    <td>{{$item->product_name}}</td>
+                    <td class="text-center"><a class='btn btn-info btn-xs' data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
+                    <td>{{$item->product}}</td>
+                </tr>
+        @endforeach
+                {{-- start modal --}}
+                <div class="container">
+                    
+                          
+            <!-- The Modal -->
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                    <h4 class="modal-title">Edit stock</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                    this store:
+                    <select class="form-control form-control-lg" name="category" id="validationCustom03" onchange="ChangecatList()" required>
+                        <option value="">Choose... </option>
+                        <option value="Classroom Instruction and Assessment">Amsterdam</option>
+                        <option value="Curriculum Development and Alignment">Lelystad</option>
+                        <option value="District Committee">Almere</option>
+                        </select>
+                        <br>
+                        belongs to this product:
+                        <select class="form-control form-control-lg" name="category" id="validationCustom03" onchange="ChangecatList()" required>
+                        <option value="">Choose... </option>
+                        <option value="Classroom Instruction and Assessment">crossant</option>
+                        <option value="Curriculum Development and Alignment">wit brood</option>
+                        <option value="District Committee">bruin brood</option>
+                        <option value="Meeting">frikandel speciaal</option>
+                        </select>
+                    <div class="invalid-feedback">
+                        Please provide a category.
+                    </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                    <button type="button" class="btn btn-success">save changes</button>
+                </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+                            {{-- add new product modal --}}
                             
 
 
-
-    
-
-
-                        <thead>
-                        <a href="#" class="btn btn-primary btn-xs pull-right"><b>+</b> Add new categories</a>
-                            <tr>
-                                <th>ID</th>
-                                <th>Title</th>
-                                <th>Parent ID</th>
-                                <th class="text-center">Action</th>
-                            </tr>
-                        </thead>
-                        @foreach ($products as $item)
-                                <tr>
-                                    <td>{{$item->id}}</td>
-                                    
-                                    <td>@foreach ($item->stores as $store)
-                                        {{$store->store_name}}
-                                        <br>
-                                        @endforeach</td>
-                                    <td>{{$item->product_name}}</td>
-                                    <td class="text-center"><a class='btn btn-info btn-xs' href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                                </tr>
-                        @endforeach
+                            
+                          </div>
                         </table>
                         </div>
                     </div>
