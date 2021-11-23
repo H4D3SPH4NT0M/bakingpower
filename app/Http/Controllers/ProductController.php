@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
+use App\Models\Stores;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Gloudemans\Shoppingcart\Contracts\Buyable;
@@ -20,7 +21,8 @@ class ProductController extends Controller
     {
         dump(Cart::content());
         return view('products', [
-            'product' => Products::all()
+            'product' => Products::all(),
+            'stores' => Stores::all()
         ]);
         
     }
@@ -39,6 +41,20 @@ class ProductController extends Controller
     return redirect()->route('carts')->with('message', 'Successfully added');
 
     }
+
+    //filter store name
+    public function filterStore(Request $request){
+        $store = Stores::find($request->input('store_id'));
+        //return redirect()->route('products')->with(['products', $store->products()], ['store', $store], ['stores' => Stores::all()]);
+        return view('products', [
+            'product' => $store->products,
+            'stores' => Stores::all(),
+            'store' => $store
+            
+        ]);
+    }
+
+
 
 
 // add product to cart with session and redirect to cart

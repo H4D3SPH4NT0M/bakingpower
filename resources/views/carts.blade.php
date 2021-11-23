@@ -42,7 +42,11 @@
 					<!-- return $object with product picture-->
 					@foreach ($carts as $object)
 					@if ($object->id == $row->id)
-					<div class="mr-1"><img class="rounded" src="data:image/png;base64,{{ chunk_split(base64_encode($object->product_pictures))}}" width="70"></div>
+					<div class="mr-1">                @if ($object->id > 6)
+						<img class="rounded" src="data:image/png;base64,{{ $object->product_pictures}}" width="70"> 
+						@else
+						<img class="rounded" src="data:image/png;base64,{{ chunk_split(base64_encode($object->product_pictures))}}" width="70"> 
+						@endif</div>
 					@endif
 
 					@endforeach

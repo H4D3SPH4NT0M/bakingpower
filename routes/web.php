@@ -45,15 +45,16 @@ Route::get('/admin', [App\Http\Controllers\SudoController::class, 'index'])
 ->name('admin');
 Route::post('/admin', [App\Http\Controllers\SudoController::class, 'get_invoices']);
 Route::post('/admin/order_complete', [App\Http\Controllers\SudoController::class, 'order_complete']);
-Route::get('/admin/stock', [App\Http\Controllers\StockController::class, 'index']);
+Route::get('/admin/stock', [App\Http\Controllers\StockController::class, 'index'])
+->name('stock');
+Route::post('/admin/stock/addproduct', [App\Http\Controllers\StockController::class, 'addproduct']);
+Route::post('/admin/stock/belongs', [App\Http\Controllers\StockController::class, 'belongs']);
+Route::post('/product', [App\Http\Controllers\ProductController::class, 'filterStore']);
+
+
+
 
 //call other fucntion in the same controller 
-
-
-
-
-
-
 //straks allemaal nodig nu niet meer
 
 // //add to cart

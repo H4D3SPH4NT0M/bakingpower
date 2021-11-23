@@ -124,8 +124,6 @@
 
     {{-- start modal --}}
     <div class="container">
-                    
-                          
         <!-- The Modal -->
         <div class="modal" id="productModal">
             <div class="modal-dialog">
@@ -133,48 +131,50 @@
                 <!-- Modal Header -->
               
                 <!-- Modal body -->
+                <form action="stock/addproduct" enctype="multipart/form-data" method="post">
+                @csrf
+
                 <div class="modal-body">
                     <div class="wrapper bg-white mt-sm-5">  
                         <h4 class="pb-4 border-bottom">Add new product:</h4>
                         <div class="d-flex align-items-start py-3 border-bottom"> <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" class="img" alt="">
                             <div class="pl-sm-4 pl-2" id="img-section"> <b>Product image</b>
-                                <p>Accepted file type .png. Less than 1MB</p> <button class="btn button border"><b>Upload</b></button>
+                                <p>Accepted file type .png. Less than 1MB</p> <input type="file" name="product_pictures"  class="btn button border">
                             </div>
                         </div>
                         <div class="py-2">
                             <div class="row py-2">
-                                <div class="col-md-6"> <label for="productname">Product name</label> <input type="text" class="bg-light form-control" placeholder="product name"> </div>
+                                <div class="col-md-6"> <label for="product_name">Product name</label> <input type="text" name="product_name" class="bg-light form-control" placeholder="product name"> </div>
+                                <div class="col-md-6"> <label for="product_price">Price</label> <input type="number" name="product_price" class="bg-light form-control" placeholder="Price"> </div>
+                                <div class="col-md-6"> <label for="product_quantity">Quantity</label> <input type="number" name="product_quantity" class="bg-light form-control" placeholder="qty"> </div>
                                 <div class="col-md-6 pt-md-0 pt-3">
-                                {{-- dropdown menu --}}
-                                    <div class="form-group">
-                                        <label for="productcategory">Product category</label>
-                                        <select class="form-control" id="productcategory">
-                                            <option>Category 1</option>
-                                            <option>Category 2</option>
-                                            <option>Category 3</option>
-                                            <option>Category 4</option>
-                                            <option>Category 5</option>
-                                        </select>
-                                    </div>
-                             </div>
-                            </div>
+                                <div class="form-group">
+                                    <label for="productcategory">Product category</label>
+                                    <select class="form-control" id="productcategory">
+                                        <option>bread</option>
+                                        <option>pastery</option>
+                                        <option>drinks</option>
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="py-3 pb-4 border-bottom"> <button class="btn btn-primary mr-3">Save Changes</button> <button class="btn border button">Cancel</button> </div>
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                            <div class="py-3 pb-4 border-bottom"> 
+                            <button class="btn btn-primary mr-3" type="submit">Save Changes</button> 
+                        </form>
+
+                            <button class="btn border button">Cancel</button> </div>
                             <div class="d-sm-flex align-items-center pt-3" id="deactivate">
                                 <div> <b>Add new products and assign them to the store</b>
                                     <p>Details about your company account and password</p>
                                 </div>
-                                <div class="ml-auto"> <button class="btn danger">close window</button> </div>
+                                <div class="ml-auto"> <button class="btn danger" data-dismiss="modal">close window</button> </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- Modal footer -->
-                <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+               
             </div>
         </div>
 
@@ -186,16 +186,17 @@
             <th class="text-center">qty</th>
         </tr>
     </thead>
-        @foreach ($products as $item)
+        @foreach ($stores as $store)
                 <tr>
-                    <td>{{$item->id}}</td>
-                    <td>@foreach ($item->stores as $store)
-                        {{$store->store_name}}
+                    <td>{{$store->id}}</td>
+
+                    <td>{{$store->store_name}}</td>
+                                        <td>@foreach ($store->products as $product)
+                        {{$product->product_name}}
                         <br>
                         @endforeach</td>
-                    <td>{{$item->product_name}}</td>
                     <td class="text-center"><a class='btn btn-info btn-xs' data-toggle="modal" data-target="#myModal" ><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Del</a></td>
-                    <td>{{$item->product}}</td>
+                    {{-- <td>{{$item->product}}</td> --}}
                 </tr>
         @endforeach
                 {{-- start modal --}}
@@ -213,28 +214,32 @@
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body">
+                        <form action="stock/belongs" method="POST">
+                            @csrf
                     this store:
-                    <select class="form-control form-control-lg" name="category" id="validationCustom03" onchange="ChangecatList()" required>
-                        <option value="">Choose... </option>
-                        <option value="Classroom Instruction and Assessment">Amsterdam</option>
-                        <option value="Curriculum Development and Alignment">Lelystad</option>
-                        <option value="District Committee">Almere</option>
+                    <select class="form-control form-control-lg" name="store_id" id="validationCustom03" onchange="ChangecatList()" required>
+                        <option name="store_id">Choose... </option>
+                        @foreach ($stores as $store)
+                        <option value="{{$store->id}}">{{$store->store_name}}</option>
+                        @endforeach
                         </select>
                         <br>
                         belongs to this product:
-                        <select class="form-control form-control-lg" name="category" id="validationCustom03" onchange="ChangecatList()" required>
-                        <option value="">Choose... </option>
-                        <option value="Classroom Instruction and Assessment">crossant</option>
-                        <option value="Curriculum Development and Alignment">wit brood</option>
-                        <option value="District Committee">bruin brood</option>
-                        <option value="Meeting">frikandel speciaal</option>
+                        <select class="form-control form-control-lg" name="product_id" id="validationCustom03" onchange="ChangecatList()" required>
+                        <option name="product_id" >Choose... </option>
+                        @foreach ($products as $p)
+                        <option value="{{$p->id}}">
+                            {{$p->product_name}}
+                        </option>
+                        @endforeach
                         </select>
                     <div class="invalid-feedback">
                         Please provide a category.
                     </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                    <button type="button" class="btn btn-success">save changes</button>
+                    <button type="submit" class="btn btn-success">save changes</button>
+                </form>
                 </div>
                     </div>
                     <!-- Modal footer -->

@@ -107,13 +107,20 @@
         <div class="d-flex flex-row">
             <div class="text-muted m-2" id="res">Showing 44 results</div>
             <div class="ml-auto mr-lg-4">
-                <div id="sorting" class="border rounded p-1 m-1"> <span class="text-muted">Sort by</span> <select name="sort" id="sort">
-                    <option value="popularity"><b>Popularity</b></option>
-                    <option value="prcie"><b>Price</b></option>
-                    <option value="rating"><b>Rating</b></option>
-                    </select> </div>
+                <form action="product" method="post">
+                    @csrf
+                    <select name="store_id">
+                {{-- <div id="sorting" class="border rounded p-1 m-1"> <span class="text-muted">Select store </span> <select name="sort" id="sort"> --}}
+                    @foreach ($stores as $store)
+                    <option value="{{$store->id}}"><b>{{$store->store_name}}</b>
+                    </option>
+                    @endforeach
+                    </select>
+                    <input type="submit" value="filter"> 
+                </div>
             </div>
         </div>
+    </form>
         @if (session('message'))
 <div>{{ session('message') }}</div>
 @endif
@@ -124,7 +131,14 @@
             <div class="col-lg-4 col-md-4 p-4 col-sm-10 offset-md-0 offset-sm-1">
                 {{-- display product_pictures from database  --}}
                 <div class="card"> 
-                    <img class="card-img-top" src="data:image/png;base64,{{ chunk_split(base64_encode($products->product_pictures))}}"> 
+                
+                @if ($products->id > 6)
+                <img class="card-img-top" src="data:image/png;base64,{{ $products->product_pictures}}"> 
+                @else
+                <img class="card-img-top" src="data:image/png;base64,{{ chunk_split(base64_encode($products->product_pictures))}}"> 
+                @endif
+                
+                    
                     <div class="card-body pt-1">
                      
                         <h5><small>Aantal beschickbaar: {{{$products->product_quantity}}}</small></h5>

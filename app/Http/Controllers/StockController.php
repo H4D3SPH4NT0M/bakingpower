@@ -36,28 +36,27 @@ class StockController extends Controller
 
     }
 
-    public function update(request $request)
-    {
-      $product = Products::findOrFail($request->input('id'));
-      $product->product_quantity = $request->input('product_quantity');
-      $product->save();
-      return redirect()->route('stock');
-    }
-    
-    public function delete(request $request)
-    {
-      $product = Products::findOrFail($request->input('id'));
-      $product->delete();
-      return redirect()->route('stock');
-    }
-
-    public function create(request $request)
+    // 
+    public function addproduct(request $request)
     {
       $product = new Products;
       $product->product_name = $request->input('product_name');
       $product->product_price = $request->input('product_price');
       $product->product_quantity = $request->input('product_quantity');
-      $product->save();
+      $path = $request->file('product_pictures')->getRealPath();
+      $logo = file_get_contents($path);
+      $base64 = base64_encode($logo);
+      // $image = base64_encode($request->file('product_pictures')->pat‌​h());
+      $product->product_pictures = $base64;
+      $product->save(); 
       return redirect()->route('stock');
     }
-}
+    public function belongs(request $request)
+    {
+      $product = Products::find($request->input('product_id'));
+      $product->stores()->attach($request->input('store_id'));
+      return redirect()->route('stock');
+    }
+   
+  }
+
