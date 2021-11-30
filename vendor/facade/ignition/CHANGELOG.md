@@ -1,6 +1,38 @@
 # Changelog
 
-All notable changes to `ignition` will be documented in this fil
+All notable changes to `ignition` will be documented in this file
+
+## 2.17.2 - 2021-11-29
+
+- scroll overflow on solutions
+
+## 2.17.1 - 2021-11-25
+
+- streamline Livewire solutions
+
+## 2.17.0 - 2021-11-24
+
+- improve recording of Livewire data
+
+## 2.16.1 - 2021-11-16
+
+- allow sending of unbinded sql queries to Flare
+
+## 2.16.0 - 2021-10-28
+
+- improve recording data from jobs (#416)
+
+## 2.15.0 - 2021-10-11
+
+- improve output of flare:test
+
+## 2.14.1 - 2021-10-08
+
+- update base URL for Flare
+
+## 2.14.0 - 2021-10-01
+
+- add support for VScode WSL + SSH remote (#420)
 
 ## 2.13.1 - 2021-09-13
 

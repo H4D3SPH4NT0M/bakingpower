@@ -22,11 +22,12 @@ class StockController extends Controller
       // }
       // $stores = Stores::all();
 
-      // $product->name = $request->name;
-      // $product->price = $request->price;
+      // $product->product_name = $request->name;
+      // $product->product_price = $request->price;
 
-      // 
+      
       // $product->save();
+      
 
       // dump($product);
       return view('stock', [
